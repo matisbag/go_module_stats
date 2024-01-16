@@ -13,12 +13,14 @@ import (
 
 const requestURL = "https://index.golang.org/index"
 
+// Forge represents a single forge with its path, version, and timestamp.
 type Forge struct {
 	Path      string `json:"Path"`
 	Version   string `json:"Version"`
 	Timestamp string `json:"Timestamp"`
 }
 
+// ForgeStats holds the statistics for a forge including its name (forge), number of modules, and versions.
 type ForgeStats struct {
 	Forge    string
 	Modules  int

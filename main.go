@@ -57,7 +57,7 @@ func getForges() ([]Forge, error) {
 	}
 
 	// Set a custom header for the request
-	req.Header.Set("Disable-Module-Fetch", "true")
+	req.Header.Add("Disable-Module-Fetch", "true")
 	req.Header.Add("Content-Type", "application/json")
 
 	// Send the HTTP request and get the response

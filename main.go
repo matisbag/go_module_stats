@@ -10,16 +10,12 @@ import (
 
 const requestURL = "https://index.golang.org/index"
 
-type moduleInfo struct {
+type Forge struct {
 	Path      string `json:"Path"`
 	Version   string `json:"Version"`
 	Timestamp string `json:"Timestamp"`
 }
 
-//type modulesResponse struct {
-//	Modules []moduleInfo `json:"Modules"`
-//}
-//
 //type forgeStats struct {
 //	Forge    string
 //	Modules  int
@@ -59,7 +55,6 @@ func main() {
 		fmt.Println("could not read response body:", err)
 		return
 	}
-	defer resp.Body.Close()
 	// Print the response body
 	// fmt.Printf("response body: %s\n", respBody)
 
@@ -69,12 +64,12 @@ func main() {
 	// Create a new JSON decoder
 	decoder := json.NewDecoder(reader)
 
-	// Create a slice to hold the modules
-	var modules []moduleInfo
+	// Create a slice to hold the forges
+	var forges []Forge
 
 	// Loop and read each object from the stream
 	for {
-		var mod moduleInfo
+		var mod Forge
 
 		// Decode the next JSON object
 		err := decoder.Decode(&mod)
@@ -87,12 +82,12 @@ func main() {
 			return
 		}
 
-		// Add the module to the slice
-		modules = append(modules, mod)
+		// Add the forge to the slice
+		forges = append(forges, mod)
 	}
 
-	// Print the modules
-	for _, mod := range modules {
-		fmt.Printf("Path: %s, Version: %s, Timestamp: %s\n", mod.Path, mod.Version, mod.Timestamp)
+	// Print the forges
+	for _, forge := range forges {
+		fmt.Printf("Path: %s, Version: %s, Timestamp: %s\n", forge.Path, forge.Version, forge.Timestamp)
 	}
 }

@@ -46,5 +46,5 @@ To limit the load submitted to Google, the program includes the `Disable-Module-
 ## Running the Program
 
 ```bash
-go run main.go
+go run index_godev.go
 ```

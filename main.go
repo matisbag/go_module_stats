@@ -199,7 +199,7 @@ func sortStatsForge(stats []ForgeStats) []ForgeStats {
 
 func printTable(stats []ForgeStats) {
 	// Use tab writer for a clean formatting of the table
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0 /** tabwriter.Debug **/)
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
 	defer w.Flush()
 
 	// Table headers

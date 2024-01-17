@@ -37,12 +37,15 @@ func main() {
 	stats := calculateStats(forges)
 
 	sortedStatsVersions := sortStatsVersions(stats)
+	fmt.Println("\033[36m1. Versions DESC\033[0m") // Cyan
 	printTable(sortedStatsVersions)
 
 	sortedStatsModules := sortStatsModules(stats)
+	fmt.Println("\033[36m2. Modules DESC\033[0m") // Yellow
 	printTable(sortedStatsModules)
 
 	sortedStatsForge := sortStatsForge(stats)
+	fmt.Println("\033[36m3. Forge ASC\033[0m") // Green
 	printTable(sortedStatsForge)
 }
 
@@ -150,15 +153,8 @@ func calculateStats(forges []Forge) []ForgeStats {
 }
 
 func sortStatsVersions(stats []ForgeStats) []ForgeStats {
-	// Sort the slice according to the requested criteria
+	// Sort the slice based on the number of versions in DESC order
 	sort.Slice(stats, func(i, j int) bool {
-		// Sort: 1. Versions DESC, 2. Modules DESC, 3. Forge ASC
-		if stats[i].Versions == stats[j].Versions {
-			if stats[i].Modules == stats[j].Modules {
-				return stats[i].Forge < stats[j].Forge
-			}
-			return stats[i].Modules > stats[j].Modules
-		}
 		return stats[i].Versions > stats[j].Versions
 	})
 
@@ -166,15 +162,8 @@ func sortStatsVersions(stats []ForgeStats) []ForgeStats {
 }
 
 func sortStatsModules(stats []ForgeStats) []ForgeStats {
-	// Sort the slice according to the requested criteria
+	// Sort the slice based on the number of modules in DESC order
 	sort.Slice(stats, func(i, j int) bool {
-		// Sort: 1. Modules DESC, 2. Versions DESC, 3. Forge ASC
-		if stats[i].Modules == stats[j].Modules {
-			if stats[i].Versions == stats[j].Versions {
-				return stats[i].Forge < stats[j].Forge
-			}
-			return stats[i].Versions > stats[j].Versions
-		}
 		return stats[i].Modules > stats[j].Modules
 	})
 
@@ -182,15 +171,8 @@ func sortStatsModules(stats []ForgeStats) []ForgeStats {
 }
 
 func sortStatsForge(stats []ForgeStats) []ForgeStats {
-	// Sort the slice according to the requested criteria
+	// Sort the slice based on the forge name in ASC order
 	sort.Slice(stats, func(i, j int) bool {
-		// Sort: 1. Forge ASC, 2. Versions DESC, 3. Modules DESC
-		if stats[i].Forge == stats[j].Forge {
-			if stats[i].Versions == stats[j].Versions {
-				return stats[i].Modules > stats[j].Modules
-			}
-			return stats[i].Versions > stats[j].Versions
-		}
 		return stats[i].Forge < stats[j].Forge
 	})
 
@@ -209,4 +191,6 @@ func printTable(stats []ForgeStats) {
 	for _, stat := range stats {
 		fmt.Fprintf(w, "%s\t%d\t%d\n", stat.Forge, stat.Modules, stat.Versions)
 	}
+
+	fmt.Fprintln(w)
 }

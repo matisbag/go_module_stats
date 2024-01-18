@@ -37,15 +37,15 @@ func main() {
 	stats := calculateStats(forges)
 
 	sortedStatsVersions := sortStatsVersions(stats)
-	fmt.Println("\033[36m1. Versions DESC\033[0m") // Cyan
+	fmt.Println("\033[36m1. Versions DESC\033[0m")
 	printTable(sortedStatsVersions)
 
 	sortedStatsModules := sortStatsModules(stats)
-	fmt.Println("\033[36m2. Modules DESC\033[0m") // Yellow
+	fmt.Println("\033[36m2. Modules DESC\033[0m")
 	printTable(sortedStatsModules)
 
 	sortedStatsForge := sortStatsForge(stats)
-	fmt.Println("\033[36m3. Forge ASC\033[0m") // Green
+	fmt.Println("\033[36m3. Forge ASC\033[0m")
 	printTable(sortedStatsForge)
 }
 
